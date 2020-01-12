@@ -2,6 +2,7 @@ import express from 'express';
 import mysql from 'mysql';
 import exphbs  from 'express-handlebars';
 import bodyParser from 'body-parser';
+import mysqlCredentials from './mysql-credentials.json';
 
 const HTTP_PORT = 8280;
 const server = express();
@@ -14,9 +15,7 @@ const exluded_dbs = ['mysql', 'information_schema', 'performance_schema'];
 
 const pool = mysql.createPool({
     connectionLimit : 20,
-    host            : 'localhost',
-    user            : 'root',
-    password        : '1234',
+    ...mysqlCredentials
 });
 
 const getDatabaseList = async () => new Promise((resolve, reject) => {

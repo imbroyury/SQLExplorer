@@ -1,0 +1,54 @@
+<form action='/' method='POST'>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="db-select">DB</label>
+        </div>
+        <select class="custom-select" id="db-select" name="db">
+            {{#each dbs}}
+                {{#if this.selected}}
+                    <option selected>{{this.db}}</option>
+                    {{else}}
+                    <option>{{this.db}}</option>
+                    {{/if}}
+            {{/each}}
+        </select>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Query</span>
+        </div>
+        <textarea class="form-control" name="query">{{query}}</textarea>
+    </div>
+    <input type="submit" value="Run" class="btn btn-primary"></input>
+</form>
+{{#if results.table}}
+    <div id="result">
+        <h3>Results</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    {{#each results.table.columns}}
+                        <th>{{this}}</th>
+                    {{/each}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#each results.table.rows}}
+                    <tr>
+                        {{#each this}}
+                            <td>
+                                {{this}}
+                            </td>
+                        {{/each}}
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+{{/if}}
+{{#if results.message}}
+    <div class="alert alert-success">{{results.message}}</div>
+{{/if}}
+{{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+{{/if}}

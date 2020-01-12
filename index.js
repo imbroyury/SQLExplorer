@@ -11,7 +11,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 server.engine('handlebars', exphbs());
 server.set('view engine', 'handlebars');
 
-const exluded_dbs = ['mysql', 'information_schema', 'performance_schema'];
+const exluded_dbs = ['mysql', 'information_schema', 'performance_schema', 'sys'];
 
 const pool = mysql.createPool({
     connectionLimit : 20,
